@@ -91,17 +91,15 @@ def main():
         Histogram(df_mds_long, 'Value')
         HistogramUser(df_mds_long, 'Value')
 
-        mds_col1, mds_col2, mds_col3 = st.beta_columns(3)
+        mds_col1, mds_col2 = st.beta_columns(2)
 
         with mds_col1:
             CorrHeatmap(df_mds, mds_emotlist)
-        with mds_col3:
+        with mds_col2:
             st.write('---')
             st.write('---')
             corrs = mds_corr(df_mds, mds_emotlist)
             st.write(corrs)
-        with mds_col2:
-            st.write("")
 
         ScatterMatrix(df_mds, mds_emotlist, [0,11])
         BarChartCumAnimated(df_mds_cum)
@@ -124,17 +122,15 @@ def main():
         Histogram(df_deq_long, 'Value')
         HistogramUser(df_deq_long, 'Value')
 
-        deq_col1, deq_col2, deq_col3 = st.beta_columns(3)
+        deq_col1, deq_col2 = st.beta_columns(2)
 
         with deq_col1:
             CorrHeatmap(df_deq, deq_emotlist)
-        with deq_col3:
+        with deq_col2:
             st.write('---')
             st.write('---')
             corrs = deq_corr(df_deq, deq_emotlist)
             st.write(corrs)
-        with deq_col2:
-            st.write("")
 
         ScatterMatrix(df_deq, deq_emotlist, [0, 30])
         BarChartCumAnimated(df_deq_cum)
@@ -157,17 +153,15 @@ def main():
         Histogram(df_algo_long, 'Value')
         HistogramUser(df_algo_long, 'Value')
 
-        kb_col1, kb_col2, kb_col3 = st.beta_columns(3)
+        kb_col1, kb_col2 = st.beta_columns(2)
 
         with kb_col1:
             CorrHeatmap(df_algo, algo_emotlist)
-        with kb_col3:
+        with kb_col2:
             st.write('---')
             st.write('---')
             corrs = kb_corr(df_algo, algo_emotlist)
             st.write(corrs)
-        with kb_col2:
-            st.write("")
 
         ScatterMatrix(df_algo, algo_emotlist, [0, 1])
         BarChartCumAnimated(df_algo_cum)
