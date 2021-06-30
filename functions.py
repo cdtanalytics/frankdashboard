@@ -39,3 +39,23 @@ def summarystats_groupby(data, emotions_list):
 # Subtitles with the same stylings
 def subtitles(var):
     return st.markdown(f'<p style="font-family:sans-serif; color:Blue; font-size: 24px;">{var}</p>', unsafe_allow_html=True)
+
+# Spearman correlations
+
+def mds_corr(data, emotions_list):
+    corr = data[emotions_list].corr(method='spearman')
+    corr.rename(index={'ANGER_SURVEY':'Anger', 'DISGUST_SURVEY':'Disgust', 'FEAR_SURVEY':'Fear', 'JOY_SURVEY':'Joy', 'SADNESS_SURVEY':'Sadness'}, inplace=True)
+    corr.rename(columns={'ANGER_SURVEY':'Anger', 'DISGUST_SURVEY':'Disgust', 'FEAR_SURVEY':'Fear', 'JOY_SURVEY':'Joy', 'SADNESS_SURVEY':'Sadness'}, inplace=True)
+    return corr
+
+def deq_corr(data, emotions_list):
+    corr = data[emotions_list].corr(method='spearman')
+    corr.rename(index={'anger':'Anger', 'disgust':'Disgust', 'fear':'Fear', 'joy':'Joy', 'sadness':'Sadness'}, inplace=True)
+    corr.rename(columns={'anger':'Anger', 'disgust':'Disgust', 'fear':'Fear', 'joy':'Joy', 'sadness':'Sadness'}, inplace=True)
+    return corr
+
+def kb_corr(data, emotions_list):
+    corr = data[emotions_list].corr(method='spearman')
+    corr.rename(index={'Anger_input':'Anger', 'Disgust_input':'Disgust', 'Fear_input':'Fear', 'Joy_input':'Joy', 'Sadness_input':'Sadness'}, inplace=True)
+    corr.rename(columns={'Anger_input':'Anger', 'Disgust_input':'Disgust', 'Fear_input':'Fear', 'Joy_input':'Joy', 'Sadness_input':'Sadness'}, inplace=True)
+    return corr
