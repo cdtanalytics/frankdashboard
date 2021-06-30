@@ -13,6 +13,7 @@ from getdata import *
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objs as go
+import numpy as np
 
 # -- Daily Counts Bar Chart --- #
 
@@ -66,14 +67,15 @@ def HistogramUser(data, xvalue):
 
 def CorrHeatmap(data, emotionslist):
     corr = data[emotionslist].corr(method='spearman')
+    mask = np.triu(np.ones_like(corr, dtype=bool))
+    corr_mask = corr.mask(mask)
     ticklist = emotionslist
     ticklabels = ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness']
-
     fig = go.Figure(data=go.Heatmap(
-                        z=corr.values,
-                        x=corr.index.values,
-                        y=corr.columns.values,
-                        colorscale = 'Turbo',
+                        z=corr_mask.values,
+                        y=corr_mask.index.values,
+                        x=corr_mask.columns.values,
+                        colorscale = px.colors.diverging.RdBu,
                         zmin=-1, zmax=1,
                         xgap=3,
                         ygap=3))
@@ -83,7 +85,7 @@ def CorrHeatmap(data, emotionslist):
     fig.update_yaxes(tickmode='array',
                         tickvals=ticklist,
                         ticktext=ticklabels)
-    fig.update_layout(title="Correlation Heatmap")
+    fig.update_layout(title="Correlation Heatmap", yaxis_autorange='reversed', template='plotly_white')
     st.plotly_chart(fig)
 
 # -- Scatter matrix of emotions -- #
@@ -156,6 +158,20 @@ def ScatterRegUser(data):
 
     fig.update_layout(title='Scatter plot of Survey vs. Algorithm (By User Group)')
     fig.update_layout(width=2100, height=400)
+    for a in fig.layout.annotations:
+        a.text = a.text.split("=")[1]
+    st.plotly_chart(fig)
+
+# -- Horizontal bar chart of differences (categorised) in probability
+
+def HorBarProbDiffs(data):
+    fig = px.bar(data, y='Difference', 
+                            x="Percentage",
+                            color='USERGROUP',
+                            barmode='group',
+                            facet_col='Emotion')
+    fig.update_layout(title='Bar chart of the difference (categorised %) in area under the curve (BY User Group)')
+    fig.update_layout(width=2000, height=400)
     for a in fig.layout.annotations:
         a.text = a.text.split("=")[1]
     st.plotly_chart(fig)
