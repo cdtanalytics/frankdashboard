@@ -90,7 +90,19 @@ def main():
 
         Histogram(df_mds_long, 'Value')
         HistogramUser(df_mds_long, 'Value')
-        CorrHeatmap(df_mds, mds_emotlist)
+
+        mds_col1, mds_col2, mds_col3 = st.beta_columns(3)
+
+        with mds_col1:
+            CorrHeatmap(df_mds, mds_emotlist)
+        with mds_col2:
+            st.write('---')
+            st.write('---')
+            corrs = mds_corr(df_mds, mds_emotlist)
+            st.write(corrs)
+        with mds_col3:
+            st.write("")
+
         ScatterMatrix(df_mds, mds_emotlist, [0,11])
         BarChartCumAnimated(df_mds_cum)
 
@@ -111,7 +123,19 @@ def main():
 
         Histogram(df_deq_long, 'Value')
         HistogramUser(df_deq_long, 'Value')
-        CorrHeatmap(df_deq, deq_emotlist)
+
+        deq_col1, deq_col2, deq_col3 = st.beta_columns(3)
+
+        with deq_col1:
+            CorrHeatmap(df_deq, deq_emotlist)
+        with deq_col2:
+            st.write('---')
+            st.write('---')
+            corrs = deq_corr(df_deq, deq_emotlist)
+            st.write(corrs)
+        with deq_col3:
+            st.write("")
+
         ScatterMatrix(df_deq, deq_emotlist, [0, 30])
         BarChartCumAnimated(df_deq_cum)
 
@@ -132,7 +156,19 @@ def main():
 
         Histogram(df_algo_long, 'Value')
         HistogramUser(df_algo_long, 'Value')
-        CorrHeatmap(df_algo, algo_emotlist)
+
+        kb_col1, kb_col2, kb_col3 = st.beta_columns(3)
+
+        with kb_col1:
+            CorrHeatmap(df_algo, algo_emotlist)
+        with kb_col2:
+            st.write('---')
+            st.write('---')
+            corrs = kb_corr(df_algo, algo_emotlist)
+            st.write(corrs)
+        with kb_col3:
+            st.write("")
+
         ScatterMatrix(df_algo, algo_emotlist, [0, 1])
         BarChartCumAnimated(df_algo_cum)
 
@@ -165,6 +201,9 @@ def main():
         subtitles("Strip Plot: Differences in Probability by User Group (records matched 30 min +/-)")
         StripUser(p_diffs_mds[p_diffs_mds['timing']=="30 min +/-"])
 
+        subtitles("Bar Chart: Differences in Probability (categorised) by User Group (records matched 30 min +/-)")
+        HorBarProbDiffs(p_diffs_mds_grp[p_diffs_mds_grp['timing']=="30 min +/-"])
+
     # DEQ
     prob_diff_deq = st.beta_expander("DEQ + Keyboard Input")
     with prob_diff_deq:
@@ -183,6 +222,9 @@ def main():
 
         subtitles("Strip Plot: Differences in Probability by User Group (records matched 30 min +/-)")
         StripUser(p_diffs_deq[p_diffs_deq['timing']=="30 min +/-"])
+
+        subtitles("Bar Chart: Differences in Probability (categorised) by User Group (records matched 30 min +/-)")
+        HorBarProbDiffs(p_diffs_deq_grp[p_diffs_deq_grp['timing']=="30 min +/-"])
 
 
 if __name__ == "__main__":
