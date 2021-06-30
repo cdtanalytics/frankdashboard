@@ -95,12 +95,12 @@ def main():
 
         with mds_col1:
             CorrHeatmap(df_mds, mds_emotlist)
-        with mds_col2:
+        with mds_col3:
             st.write('---')
             st.write('---')
             corrs = mds_corr(df_mds, mds_emotlist)
             st.write(corrs)
-        with mds_col3:
+        with mds_col2:
             st.write("")
 
         ScatterMatrix(df_mds, mds_emotlist, [0,11])
@@ -128,12 +128,12 @@ def main():
 
         with deq_col1:
             CorrHeatmap(df_deq, deq_emotlist)
-        with deq_col2:
+        with deq_col3:
             st.write('---')
             st.write('---')
             corrs = deq_corr(df_deq, deq_emotlist)
             st.write(corrs)
-        with deq_col3:
+        with deq_col2:
             st.write("")
 
         ScatterMatrix(df_deq, deq_emotlist, [0, 30])
@@ -161,12 +161,12 @@ def main():
 
         with kb_col1:
             CorrHeatmap(df_algo, algo_emotlist)
-        with kb_col2:
+        with kb_col3:
             st.write('---')
             st.write('---')
             corrs = kb_corr(df_algo, algo_emotlist)
             st.write(corrs)
-        with kb_col3:
+        with kb_col2:
             st.write("")
 
         ScatterMatrix(df_algo, algo_emotlist, [0, 1])
