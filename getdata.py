@@ -83,6 +83,9 @@ algo_emotlist = ['Anger_input', 'Disgust_input', 'Fear_input', 'Joy_input', 'Sad
 algo_emotlist_z = ['z_Anger_input', 'z_Disgust_input', 'z_Fear_input', 'z_Joy_input', 'z_Sadness_input']
 algo_emotlist_p = ['p_anger_input', 'p_disgust_input', 'p_fear_input', 'p_joy_input', 'p_sadness_input']
 
+dff_emotlist_p = ['diff_p_anger', 'diff_p_disgust', 'diff_p_fear', 'diff_p_joy', 'diff_p_sadness']
+dff_emotlist_p_grp = ['diff_p_anger_grp', 'diff_p_disgust_grp', 'diff_p_fear_grp', 'diff_p_joy_grp', 'diff_p_sadness_grp']
+
 timings = ["30 min +/-", "60 min +/-", "90 min +/-", "120 min +/", "150 min +/", "180 min +/"]
 
 
@@ -202,6 +205,32 @@ p_diffs_deq = myTemp.melt(id_vars=['USERID', 'USERGROUP', "timing"],
 p_diffs_deq["Emotion"].replace({'diff_p_anger':'Anger', 'diff_p_disgust':'Disgust', 'diff_p_fear':'Fear', 'diff_p_joy':'Joy', 'diff_p_sadness':'Sadness'}, inplace=True)
 del myTemp
 
+# -- Difference in Probabilities (grouped) -- #
+
+    # Daily Moods
+myTemp = df_matches_ru[df_matches_ru['source']=='MDS'][['USERID', 'USERGROUP', "timing", "diff_p_anger_grp", "diff_p_disgust_grp", "diff_p_fear_grp", "diff_p_joy_grp", "diff_p_sadness_grp"]]
+p_diffs_mds_grp = myTemp.melt(id_vars=['USERID', 'USERGROUP', 'timing'], 
+                  value_vars=dff_emotlist_p_grp,
+                  var_name='Emotion', value_name='Difference')
+p_diffs_mds_grp["Emotion"].replace({'diff_p_anger_grp':'Anger', 'diff_p_disgust_grp':'Disgust', 'diff_p_fear_grp':'Fear', 'diff_p_joy_grp':'Joy', 'diff_p_sadness_grp':'Sadness'}, inplace=True)
+
+p_diffs_mds_grp = p_diffs_mds_grp.groupby(['USERGROUP', 'timing', 'Emotion', 'Difference']).size().reset_index()
+p_diffs_mds_grp['total'] = p_diffs_mds_grp.groupby(['USERGROUP', 'timing', 'Emotion'])[0].transform('sum')
+p_diffs_mds_grp['Percentage'] = ((p_diffs_mds_grp[0]/p_diffs_mds_grp['total'])*100).round(2)
+del myTemp
+
+    # DEQ
+myTemp = df_matches_ru[df_matches_ru['source']=='DEQ'][['USERID', 'USERGROUP', "timing", "diff_p_anger_grp", "diff_p_disgust_grp", "diff_p_fear_grp", "diff_p_joy_grp", "diff_p_sadness_grp"]]
+p_diffs_deq_grp = myTemp.melt(id_vars=['USERID', 'USERGROUP', 'timing'], 
+                  value_vars=dff_emotlist_p_grp,
+                  var_name='Emotion', value_name='Difference')
+p_diffs_deq_grp["Emotion"].replace({'diff_p_anger_grp':'Anger', 'diff_p_disgust_grp':'Disgust', 'diff_p_fear_grp':'Fear', 'diff_p_joy_grp':'Joy', 'diff_p_sadness_grp':'Sadness'}, inplace=True)
+
+p_diffs_deq_grp = p_diffs_deq_grp.groupby(['USERGROUP', 'timing', 'Emotion', 'Difference']).size().reset_index()
+p_diffs_deq_grp['total'] = p_diffs_deq_grp.groupby(['USERGROUP', 'timing', 'Emotion'])[0].transform('sum')
+p_diffs_deq_grp['Percentage'] = ((p_diffs_deq_grp[0]/p_diffs_deq_grp['total'])*100).round(2)
+del myTemp
+
 # -- Probabilities as a long file with the survey as one column and the algorithm as one column. Used in regression -- #
 
     # Raw Values
@@ -229,6 +258,3 @@ p_algo_long = df_matches_ru.melt(id_vars=['USERID', 'USERGROUP', 'timing', 'sour
 p_algo_long["Emotion"].replace({'max_p_anger_input':'Anger', 'max_p_disgust_input':'Disgust', 'max_p_fear_input':'Fear', 'max_p_joy_input':'Joy', 'max_p_sadness_input':'Sadness'}, inplace=True)
 
 matched_probs_long = pd.merge(p_survey_long, p_algo_long['Algorithm'], left_index=True, right_index=True)
-
-
-
