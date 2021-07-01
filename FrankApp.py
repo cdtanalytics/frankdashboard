@@ -51,11 +51,7 @@ def main():
     # All data
     summaryInfo = st.beta_expander("Summary Information")
     with summaryInfo:
-        
-        subtitles("All Data: Summary Information")
-        st.dataframe(df_info)
-        st.write('---')
-
+  
         subtitles("Daily Participation (n participants)")
 
         # Daily Moods
@@ -150,14 +146,46 @@ def main():
     # Keyboard input
     kb_raw = st.beta_expander("Keyboard Input")
     with kb_raw:
-        subtitles("Keyboard Input: Descriptive statistics on emotions")
+        # Raw data
+        subtitles("Keyboard Input (Raw Data): Descriptive statistics on emotions")
+        st.write("All")
+        st.write(summarystats(sentiment, kb_emotlist))
+        st.write("By User Group")
+        st.write(summarystats_groupby(sentiment, kb_emotlist))
+        st.write('---')
+        
+        subtitles("Keyboard Input (Raw Data): Mean emotions based on the emoji identified in the text")
+        st.write("The website http://www.unicode.org/emoji/charts/full-emoji-list.html was scraped for all emoji text, and then the Keyboard Input text was scanned for each emoji.")
+        st.write("The following shows the mean scores for each emotion based on the type of emoji identified. The [] represents records where no emoji was identified.")
+        emoji_mean = sentiment[['Anger_Input', 'Disgust_Input', 'Fear_Input', 'Joy_Input', 'Sadness_Input', 'emoji']].groupby('emoji').mean().round(4)
+        emoji_count = sentiment.groupby('emoji')['emoji'].agg({'count'})
+        emoji_stats = pd.merge(emoji_count, emoji_mean, on='emoji')
+        st.dataframe(emoji_stats)
+        st.write('---')
+        
+        subtitles("Keyboard Input (Raw Data): Sentiment Analysis on the Input Text and comparing it to the algorithm scores")
+        st.write("The following shows the correlations between the raw algorithm scores and the sentiment analysis of the keyboard text, along with word count and subjectivity.")
+        st.write("Polarity: Ranges from -1.0 to 1.0 for negative to positive sentiment. You would expect text that has a high score for Joy would have more positive sentiment.")
+        st.write("Subjectivity: Ranges from 0.0 to 1.0. It is an indication of how much subjectivity there is in the text. This is good for identifying text that shows opinions.")
+        st.write("")
+        st.write("The results show that sentiment is negatively correlated with Fear and Sadnes, and positively correlated with Joy, however these are weak correlations.")
+        st.write("It can also be observed that word count is positively correlated with Fear, meaning that the more words the higher the Fear score. Word count is also strongly correlated with subjectivity.")
+        
+        SentCorrHeatmap(sentiment, kb_sent_emotlist)
+        corrs = kb_sent_corr(sentiment, kb_sent_emotlist)
+        st.dataframe(corrs)
+        
+        st.write('---')
+
+        # Rolled up records
+        subtitles("Keyboard Input (Rolled up records): Descriptive statistics on emotions")
         st.write("All")
         st.write(summarystats(df_algo, algo_emotlist))
         st.write("By User Group")
         st.write(summarystats_groupby(df_algo, algo_emotlist))
         st.write('---')
 
-        st.write("The plots below are histograms of the DEQ raw data for each emotion. All emotions are skewed with more values towards zero.")
+        st.write("The plots below are histograms of the Keyboard Input raw data for each emotion. All emotions are skewed with more values towards zero.")
         Histogram(df_algo_long, 'Value')
 
         st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
@@ -176,19 +204,6 @@ def main():
 
         st.write('---')
 
-        subtitles("Sentiment Analysis on the Input Text and comparing it to the algorithm scores")
-        st.write("The following shows the correlations between the raw algorithm scores and the sentiment analysis of the keyboard text, along with word count and subjectivity.")
-        st.write("Polarity: Ranges from -1.0 to 1.0 for negative to positive sentiment. You would expect text that has a high score for Joy would have more positive sentiment.")
-        st.write("Subjectivity: Ranges from 0.0 to 1.0. It is an indication of how much subjectivity there is in the text. This is good for identifying text that shows opinions.")
-        st.write("")
-        st.write("The results show that sentiment is negatively correlated with Fear and Sadnes, and positively correlated with Joy, however these are weak correlations.")
-        st.write("It can also be observed that word count is positively correlated with Fear, meaning that the more words the higher the Fear score. Word count is also strongly correlated with subjectivity.")
-        
-        SentCorrHeatmap(sentiment, kb_sent_emotlist)
-        corrs = kb_sent_corr(sentiment, kb_sent_emotlist)
-        st.dataframe(corrs)
-        
-        st.write('---')
 
     # - DASHBOARD 2: DATA ANALYSES - #
 
