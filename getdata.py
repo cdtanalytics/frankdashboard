@@ -34,6 +34,7 @@ def load_sentdata():
     return raw_data
 
 sentiment = load_sentdata()
+sentiment.rename(columns={'userGroup':'USERGROUP'}, inplace=True)
 
 # -- Create a dataframe that has all the summary information from the different datasets -- #
 
