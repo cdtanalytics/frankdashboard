@@ -264,7 +264,6 @@ def main():
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=10)
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
-        with sentmds_col21:
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
         st.write(corrs)
 
