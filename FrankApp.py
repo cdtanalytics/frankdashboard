@@ -182,7 +182,7 @@ def main():
         st.write("Subjectivity: Ranges from 0.0 to 1.0. It is an indication of how much subjectivity there is in the text. This is good for identifying text that shows opinions.")
         st.write("")
         st.write("The results show that sentiment is negatively correlated with Fear and Sadnes, and positively correlated with Joy, however these are weak correlations.")
-        st.write("It can also be observed that word count is positivly correlated with Fear, meaning that the more words the higher the Fear score. Word is also strongly correlated with subjectivity.")
+        st.write("It can also be observed that word count is positively correlated with Fear, meaning that the more words the higher the Fear score. Word count is also strongly correlated with subjectivity.")
         
         SentCorrHeatmap(sentiment, kb_sent_emotlist)
         corrs = kb_sent_corr(sentiment, kb_sent_emotlist)
