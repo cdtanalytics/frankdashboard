@@ -136,6 +136,7 @@ def main():
         st.dataframe(corrs)
         st.write('---')
 
+        st.write("The following plot is a scatter matrix of each emotion - toggle the USERGROUP in the legend to see individual groups.")
         ScatterMatrix(df_deq, deq_emotlist, [0, 30])
 
         st.write("The following plot is an animated bar chart of the amount each emotion grows across the study period. It is the cummulative growth of each emotion.")
@@ -160,7 +161,7 @@ def main():
         st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
         HistogramUser(df_sent_long, 'Value')
         
-        st.write(" The following plot is a scatter matrix of each emotion.")
+        st.write("The following plot is a scatter matrix of each emotion - toggle the USERGROUP in the legend to see individual groups.")
         ScatterMatrix(sentiment, kb_emotlist2, [0, 1])
         
         subtitles("Keyboard Input (Raw Data): Mean emotions based on the emoji identified in the text")
