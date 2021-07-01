@@ -175,7 +175,7 @@ def main():
 
         st.write("Below is a correlation plot of the Keyboard Input data for each emotion. Anger is positively correlated mostly with Digust. Sadness is mostly correlated with Fear. Interestingly Joy is positively correlated with Disgust.")
 
-        kb_col1, kb_col2 = st.beta_columns(3)
+        kb_col1, kb_col2 = st.beta_columns(2)
 
         with kb_col1:
             CorrHeatmap(df_algo, algo_emotlist)
