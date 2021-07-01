@@ -154,6 +154,15 @@ def main():
         st.write(summarystats_groupby(sentiment, kb_emotlist))
         st.write('---')
         
+        st.write("The plots below are histograms of the Keyboard Input raw data for each emotion. All emotions are skewed with more values towards zero.")
+        Histogram(df_sent_long, 'Value')
+
+        st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
+        HistogramUser(df_sent_long, 'Value')
+        
+        st.write(" The following plot is a scatter matrix of each emotion.")
+        ScatterMatrix(sentiment, kb_emotlist2, [0, 1])
+        
         subtitles("Keyboard Input (Raw Data): Mean emotions based on the emoji identified in the text")
         st.write("The website http://www.unicode.org/emoji/charts/full-emoji-list.html was scraped for all emoji text, and then the Keyboard Input text was scanned for each emoji.")
         st.write("The following shows the mean scores for each emotion based on the type of emoji identified. The [] represents records where no emoji was identified.")
