@@ -231,43 +231,40 @@ def main():
     with prob_diff_mds:
 
             # Scatterplots
-        subtitles("Scatter Plot: Raw Values for Survey vs. Algorithm (records matched 30 min +/-)")
+        subtitles("Matched Records (from Rolled Up): Values for Survey vs. Algorithm (records matched 30 min +/-)")
         st.write("The plots below are scatter plots showing the algorithm scores against the matched DAILY MOODS scores with a regression line.")
         ScatterReg(matched_raw_long[(matched_raw_long['source']=='MDS') & (matched_raw_long['timing']=="30 min +/-")])
         st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
         ScatterRegUser(matched_raw_long[(matched_raw_long['source']=='MDS') & (matched_raw_long['timing']=="30 min +/-")])
 
             # Scatterplots - probabilities
-        subtitles("Scatter Plot: Probabitilities for Survey vs. Algorithm (records matched 30 min +/-)")
+        subtitles("Matched Records (from Rolled Up): Probabitilities for Survey vs. Algorithm (records matched 30 min +/-)")
         st.write("The following plots are similar to those above, but this time we look at the probability (area under the curve). The perfect outcome here would be a diagonal line from bottom left to top right.")
         ScatterReg(matched_probs_long[(matched_probs_long['source']=='MDS') & (matched_probs_long['timing']=="30 min +/-")])
         st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
         ScatterRegUser(matched_probs_long[(matched_probs_long['source']=='MDS') & (matched_probs_long['timing']=="30 min +/-")])
 
             # Histograms - difference in probabilities
-        subtitles("Histogram: Differences in Probability by User Group (records matched 30 min +/-)")
+        subtitles("Matched Records (from Rolled Up): Differences in Probability by User Group (records matched 30 min +/-)")
         st.write("The following plots are histograms of the difference between the probabilities (area under the curve) for algrorithm and DAILY MOODS. The ideal results would show less difference and therefore a higher proportion towards zero.")
         Histogram(p_diffs_mds[p_diffs_mds['timing']=="30 min +/-"], 'Difference')
         st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
         HistogramUser(p_diffs_mds[p_diffs_mds['timing']=="30 min +/-"], 'Difference')
 
             # Strip plot differences in probabilities
-        subtitles("Strip Plot: Differences in Probability by User Group (records matched 30 min +/-)")
         st.write("The following plots are strip plots, which show the scattered distribution of the differences in probabilities between the algorithm and matched DAILY MOODS.")
         StripUser(p_diffs_mds[p_diffs_mds['timing']=="30 min +/-"])
 
             # Bar chart - differences in probabilities
-        subtitles("Bar Chart: Differences in Probability (categorised) by User Group (records matched 30 min +/-)")
         st.write("The following plots show the percentage of records categorised by the differences in probabilities (bins = 0.10). The ideal result would show a higher percentage in the <0.10 group.")
         HorBarProbDiffs(p_diffs_mds_grp[p_diffs_mds_grp['timing']=="30 min +/-"])
 
-                    # Correlation heatmap
-        subtitles("Correlation Plot: Raw Values for DAILY MOODS, Word Count, Polarity, Subjectivity (records matched 30 min +/-)")
+             # Correlation heatmap
+        subtitles("Matched Records (from Raw): Values for DAILY MOODS, Word Count, Polarity, Subjectivity (records matched 30 min +/-)")
         st.write("The following shows the correlations between the DAILY MOODS and the sentiment analysis of the matched keyboard text, along with word count and subjectivity.")
         st.write("Polarity: Ranges from -1.0 to 1.0 for negative to positive sentiment. You would expect text that has a high score for Joy would have more positive sentiment.")
         st.write("Subjectivity: Ranges from 0.0 to 1.0. It is an indication of how much subjectivity there is in the text. This is good for identifying text that shows opinions.")
         
-        sentmds_col1, sentmds_col2 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS")
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -275,7 +272,6 @@ def main():
         st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.5")
-        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS") & (df_matches_sent['subjectivity']>=0.5)
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -283,7 +279,6 @@ def main():
         st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.7")
-        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS") & (df_matches_sent['subjectivity']>=0.7)
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -291,7 +286,6 @@ def main():
         st.write('---')
 
         subtitles("Same as above, where word count is > 5")
-        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=5)
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -299,7 +293,6 @@ def main():
         st.write('---')
 
         subtitles("Same as above, where word count is > 10")
-        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=10)
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -311,38 +304,36 @@ def main():
     with prob_diff_deq:
 
             # Scatterplots
-        subtitles("Scatter Plot: Raw Values for Survey vs. Algorithm (records matched 30 min +/-)")
+        subtitles("Matched Records (from Rolled Up): Values for Survey vs. Algorithm (records matched 30 min +/-)")
         st.write("The plots below are scatter plots showing the algorithm scores against the matched DEQ scores with a regression line.")
         ScatterReg(matched_raw_long[(matched_raw_long['source']=='DEQ') & (matched_raw_long['timing']=="30 min +/-")])
         st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
         ScatterRegUser(matched_raw_long[(matched_raw_long['source']=='DEQ') & (matched_raw_long['timing']=="30 min +/-")])
 
             # Scatterplot probabilities
-        subtitles("Scatter Plot: Probabitilities for Survey vs. Algorithm (records matched 30 min +/-)")
+        subtitles("Matched Records (from Rolled Up): Probabitilities for Survey vs. Algorithm (records matched 30 min +/-)")
         st.write("The following plots are similar to those above, but this time we look at the probability (area under the curve). The perfect outcome here would be a diagonal line from bottom left to top right.")
         ScatterReg(matched_probs_long[(matched_probs_long['source']=='DEQ') & (matched_probs_long['timing']=="30 min +/-")])
         st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
         ScatterRegUser(matched_probs_long[(matched_probs_long['source']=='DEQ') & (matched_probs_long['timing']=="30 min +/-")])
 
             # Histogram - differences in probabilities
-        subtitles("Histogram: Differences in Probability by User Group (records matched 30 min +/-)")
+        subtitles("Matched Records (from Rolled Up): Differences in Probability by User Group (records matched 30 min +/-)")
         st.write("The following plots are histograms of the difference between the probabilities (area under the curve) for algrorithm and DEQ. The ideal results would show less difference and therefore a higher proportion towards zero.")
         Histogram(p_diffs_deq[p_diffs_deq['timing']=="30 min +/-"], 'Difference')
         st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
         HistogramUser(p_diffs_deq[p_diffs_deq['timing']=="30 min +/-"], 'Difference')
        
             # Strip plot - differences in probabilities
-        subtitles("Strip Plot: Differences in Probability by User Group (records matched 30 min +/-)")
         st.write("The following plots are strip plots, which show the scattered distribution of the differences in probabilities between the algorithm and matched DEQ.")
         StripUser(p_diffs_deq[p_diffs_deq['timing']=="30 min +/-"])
 
             # Bar chart - differences in probabilities
-        subtitles("Bar Chart: Differences in Probability (categorised) by User Group (records matched 30 min +/-)")
         st.write("The following plots show the percentage of records categorised by the differences in probabilities (bins = 0.10). The ideal result would show a higher percentage in the <0.10 group.")
         HorBarProbDiffs(p_diffs_deq_grp[p_diffs_deq_grp['timing']=="30 min +/-"])
 
             # Correlation heatmap
-        subtitles("Correlation Plot: Raw Values for DEQ, Word Count, Polarity, Subjectivity (records matched 30 min +/-)")
+        subtitles("Matched Records (from Raw): Values for DEQ, Word Count, Polarity, Subjectivity (records matched 30 min +/-)")
         st.write("The following shows the correlations between the DEQ and the sentiment analysis of the matched keyboard text, along with word count and subjectivity.")
         st.write("Polarity: Ranges from -1.0 to 1.0 for negative to positive sentiment. You would expect text that has a high score for Joy would have more positive sentiment.")
         st.write("Subjectivity: Ranges from 0.0 to 1.0. It is an indication of how much subjectivity there is in the text. This is good for identifying text that shows opinions.")
@@ -354,7 +345,6 @@ def main():
         st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.5")
-        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['subjectivity']>=0.5)
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
@@ -362,7 +352,6 @@ def main():
         st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.7")
-        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['subjectivity']>=0.7)
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
@@ -370,7 +359,6 @@ def main():
         st.write('---')
             
         subtitles("Same as above, where word count is > 5")
-        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=5)
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
@@ -378,7 +366,6 @@ def main():
         st.write('---')
 
         subtitles("Same as above, where word count is > 10")
-        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=10)
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
