@@ -22,7 +22,7 @@ def DailyBarChart(data):
                       y='USERID', 
                       labels=dict(Date="Date", USERID="Participants (n)"))
     fig.update_layout(title='Number of distinct participants each day')
-    fig.update_layout(width=1900, height=400, xaxis_range=['2021-01-01', '2021-06-01'])
+    fig.update_layout(width=1800, height=400, xaxis_range=['2021-01-01', '2021-06-01'])
     st.plotly_chart(fig)
 
 def DailyBarChartUser(data):
@@ -31,7 +31,7 @@ def DailyBarChartUser(data):
                       color='USERGROUP', 
                       labels=dict(Date="Date", USERID="Participants (n)"))
     fig.update_layout(title='Number of distinct participants each day (By User Group)')
-    fig.update_layout(width=2000, height=400, xaxis_range=['2021-01-01', '2021-06-01'])
+    fig.update_layout(width=1900, height=400, xaxis_range=['2021-01-01', '2021-06-01'])
     st.plotly_chart(fig)
 
 # -- Histograms of each emotion (facet grid) -- #
@@ -134,7 +134,7 @@ def StripUser(data):
                          color='USERGROUP',
                          facet_col="Emotion")
     fig.update_layout(title='Strip plot of difference in area under the curve')
-    fig.update_layout(width=1900, height=400)
+    fig.update_layout(width=1800, height=400)
     for a in fig.layout.annotations:
         a.text = a.text.split("=")[1]
     st.plotly_chart(fig)
@@ -167,7 +167,7 @@ def ScatterReg(data):
                     trendline="ols")
 
     fig.update_layout(title='Scatter plot of Survey vs. Algorithm')
-    fig.update_layout(width=1900, height=400)
+    fig.update_layout(width=1800, height=400)
     for a in fig.layout.annotations:
         a.text = a.text.split("=")[1]
     st.plotly_chart(fig)
@@ -181,7 +181,7 @@ def ScatterRegUser(data):
                     trendline="ols")
 
     fig.update_layout(title='Scatter plot of Survey vs. Algorithm (By User Group)')
-    fig.update_layout(width=2000, height=400)
+    fig.update_layout(width=1900, height=400)
     for a in fig.layout.annotations:
         a.text = a.text.split("=")[1]
     st.plotly_chart(fig)
@@ -195,7 +195,7 @@ def HorBarProbDiffs(data):
                             barmode='group',
                             facet_col='Emotion')
     fig.update_layout(title='Bar chart of the difference (categorised %) in area under the curve (BY User Group)')
-    fig.update_layout(width=1900, height=400)
+    fig.update_layout(width=1800, height=400)
     for a in fig.layout.annotations:
         a.text = a.text.split("=")[1]
     st.plotly_chart(fig)
