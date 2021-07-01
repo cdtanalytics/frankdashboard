@@ -101,16 +101,9 @@ def main():
         HistogramUser(df_mds_long, 'Value')
 
         st.write("Below is a correlation plot of the DAILY MOODS for each emotion. Anger is positively correlated with Digust, Fear, and Sadness. Joy is negatively correlated with Sadness.")
-
-        mds_col1, mds_col2 = st.beta_columns([3,1])
-
-        with mds_col1:
-            CorrHeatmap(df_mds, mds_emotlist)
-        with mds_col2:
-            st.write('---')
-            st.write('---')
-            corrs = mds_corr(df_mds, mds_emotlist)
-            st.write(corrs)
+        CorrHeatmap(df_mds, mds_emotlist)
+        corrs = mds_corr(df_mds, mds_emotlist)
+        st.write(corrs)
   
         st.write("Below is a scatter matrix of each emotion. The limitation of this plot is that it doesn't show how many records are under each data point.")
         st.write("Toggle the USERGROUP in the legend to see individual groups.")
@@ -139,16 +132,9 @@ def main():
         HistogramUser(df_deq_long, 'Value')
 
         st.write("Below is a correlation plot of the DEQ data for each emotion. Anger is positively correlated with Digust, Fear, and Sadness. Joy is more negatively correlated with Sadness compared to the same in DAILY MOODS.")
-
-        deq_col1, deq_col2 = st.beta_columns([3,1])
-
-        with deq_col1:
-            CorrHeatmap(df_deq, deq_emotlist)
-        with deq_col2:
-            st.write('---')
-            st.write('---')
-            corrs = deq_corr(df_deq, deq_emotlist)
-            st.write(corrs)
+        CorrHeatmap(df_deq, deq_emotlist)
+        corrs = deq_corr(df_deq, deq_emotlist)
+        st.write(corrs)
 
         ScatterMatrix(df_deq, deq_emotlist, [0, 30])
 
@@ -174,16 +160,9 @@ def main():
         HistogramUser(df_algo_long, 'Value')
 
         st.write("Below is a correlation plot of the Keyboard Input data for each emotion. Anger is positively correlated mostly with Digust. Sadness is mostly correlated with Fear. Interestingly Joy is positively correlated with Disgust.")
-
-        kb_col1, kb_col2 = st.beta_columns([3,1])
-
-        with kb_col1:
-            CorrHeatmap(df_algo, algo_emotlist)
-        with kb_col2:
-            st.write('---')
-            st.write('---')
-            corrs = kb_corr(df_algo, algo_emotlist)
-            st.write(corrs)
+        CorrHeatmap(df_algo, algo_emotlist)
+        corrs = kb_corr(df_algo, algo_emotlist)
+        st.write(corrs)
 
         ScatterMatrix(df_algo, algo_emotlist, [0, 1])
 
@@ -200,14 +179,9 @@ def main():
         st.write("The results show that sentiment is negatively correlated with Fear and Sadnes, and positively correlated with Joy, however these are weak correlations.")
         st.write("It can also be observed that word count is positivly correlated with Fear, meaning that the more words the higher the Fear score. Word is also strongly correlated with subjectivity.")
         
-        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
-        with sentmds_col11:
-            SentCorrHeatmap(sentiment, kb_sent_emotlist)
-        with sentmds_col21:
-            st.write('---')
-            st.write('---')
-            corrs = kb_sent_corr(sentiment, kb_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(sentiment, kb_sent_emotlist)
+        corrs = kb_sent_corr(sentiment, kb_sent_emotlist)
+        st.write(corrs)
 
     # - DASHBOARD 2: DATA ANALYSES - #
 
@@ -261,57 +235,38 @@ def main():
         
         sentmds_col1, sentmds_col2 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS")
-        with sentmds_col1:
-            SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
-        with sentmds_col2:
-            st.write('---')
-            st.write('---')
-            corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
+        corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
+        st.write(corrs)
 
         subtitles("Same as above, where subjectivity is > 0.5")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS") & (df_matches_sent['subjectivity']>=0.5)
-        with sentmds_col11:
-            SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
-        with sentmds_col21:
-            st.write('---')
-            st.write('---')
-            corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
+        corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
+        st.write(corrs)
 
         subtitles("Same as above, where subjectivity is > 0.7")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS") & (df_matches_sent['subjectivity']>=0.7)
-        with sentmds_col11:
-            SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
-        with sentmds_col21:
-            st.write('---')
-            st.write('---')
-            corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
+        corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
+        st.write(corrs)
 
         subtitles("Same as above, where word count is > 5")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=5)
-        with sentmds_col11:
-            SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
-        with sentmds_col21:
-            st.write('---')
-            st.write('---')
-            corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
+        corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
+        st.write(corrs)
 
         subtitles("Same as above, where word count is > 10")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=10)
-        with sentmds_col11:
-            SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
+        SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         with sentmds_col21:
-            st.write('---')
-            st.write('---')
-            corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-            st.write(corrs)
+        corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
+        st.write(corrs)
 
     # DEQ
     prob_diff_deq = st.beta_expander("DEQ + Keyboard Input")
@@ -355,57 +310,37 @@ def main():
         st.write("Subjectivity: Ranges from 0.0 to 1.0. It is an indication of how much subjectivity there is in the text. This is good for identifying text that shows opinions.")
         sentmds_col1, sentmds_col2 = st.beta_columns([3,1])
         mask2 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ")
-        with sentmds_col1:
-            SentCorrHeatmap(df_matches_sent[mask2], kb_sent_emotlist)
-        with sentmds_col2:
-            st.write('---')
-            st.write('---')
-            corrs = kb_sent_corr(df_matches_sent[mask2], kb_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(df_matches_sent[mask2], kb_sent_emotlist)
+        corrs = kb_sent_corr(df_matches_sent[mask2], kb_sent_emotlist)
+        st.write(corrs)
 
         subtitles("Same as above, where subjectivity is > 0.5")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['subjectivity']>=0.5)
-        with sentmds_col11:
-            SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
-        with sentmds_col21:
-            st.write('---')
-            st.write('---')
-            corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
+        corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
+        st.write(corrs)
 
         subtitles("Same as above, where subjectivity is > 0.7")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['subjectivity']>=0.7)
-        with sentmds_col11:
-            SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
-        with sentmds_col21:
-            st.write('---')
-            st.write('---')
-            corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
+        corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
+        st.write(corrs)
             
         subtitles("Same as above, where word count is > 5")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=5)
-        with sentmds_col11:
-            SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
-        with sentmds_col21:
-            st.write('---')
-            st.write('---')
-            corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
+        corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
+        st.write(corrs)
 
         subtitles("Same as above, where word count is > 10")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=10)
-        with sentmds_col11:
-            SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
-        with sentmds_col21:
-            st.write('---')
-            st.write('---')
-            corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
-            st.write(corrs)
+        SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
+        corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
+        st.write(corrs)
 
 if __name__ == "__main__":
     main()
