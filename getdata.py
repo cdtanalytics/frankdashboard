@@ -26,7 +26,14 @@ df_deq = load_data('frank.deq')
 df_algo = load_data('frank.kb_rolledup')
 df_mds_deq = load_data('frank.deq_moods_timing')
 df_matches_ru = load_data('matches_rolledup')
+df_matches_sent = load_data('sentmatches')
 
+@st.cache
+def load_sentdata():
+    raw_data = pd.read_csv('sentiment_analysis.csv')
+    return raw_data
+
+sentiment = load_sentdata()
 
 # -- Create a dataframe that has all the summary information from the different datasets -- #
 
@@ -87,6 +94,9 @@ dff_emotlist_p = ['diff_p_anger', 'diff_p_disgust', 'diff_p_fear', 'diff_p_joy',
 dff_emotlist_p_grp = ['diff_p_anger_grp', 'diff_p_disgust_grp', 'diff_p_fear_grp', 'diff_p_joy_grp', 'diff_p_sadness_grp']
 
 timings = ["30 min +/-", "60 min +/-", "90 min +/-", "120 min +/", "150 min +/", "180 min +/"]
+
+srvy_sent_emotlist = ['anger', 'disgust', 'fear', 'joy', 'sadness', 'word_count', 'polarity', 'subjectivity']
+kb_sent_emotlist = ['Anger_Input', 'Disgust_Input', 'Fear_Input', 'Joy_Input', 'Sadness_Input', 'word_count', 'polarity', 'subjectivity']
 
 
 # -- Create a dataset of the dates by Emotion and User Group -- #
@@ -258,3 +268,8 @@ p_algo_long = df_matches_ru.melt(id_vars=['USERID', 'USERGROUP', 'timing', 'sour
 p_algo_long["Emotion"].replace({'max_p_anger_input':'Anger', 'max_p_disgust_input':'Disgust', 'max_p_fear_input':'Fear', 'max_p_joy_input':'Joy', 'max_p_sadness_input':'Sadness'}, inplace=True)
 
 matched_probs_long = pd.merge(p_survey_long, p_algo_long['Algorithm'], left_index=True, right_index=True)
+
+
+
+
+

@@ -88,6 +88,30 @@ def CorrHeatmap(data, emotionslist):
     fig.update_layout(title="Correlation Heatmap", yaxis_autorange='reversed', template='plotly_white')
     st.plotly_chart(fig)
 
+def SentCorrHeatmap(data, emotionslist):
+    corr = data[emotionslist].corr(method='spearman')
+    mask = np.triu(np.ones_like(corr, dtype=bool))
+    corr_mask = corr.mask(mask)
+    ticklist = emotionslist
+    ticklabels = ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness', 'Word Count', 'Polarity', 'Subjectivity']
+    fig = go.Figure(data=go.Heatmap(
+                        z=corr_mask.values,
+                        y=corr_mask.index.values,
+                        x=corr_mask.columns.values,
+                        colorscale = px.colors.diverging.RdBu,
+                        zmin=-1, zmax=1,
+                        xgap=3,
+                        ygap=3))
+    fig.update_xaxes(tickmode='array',
+                        tickvals=ticklist,
+                        ticktext=ticklabels)
+    fig.update_yaxes(tickmode='array',
+                        tickvals=ticklist,
+                        ticktext=ticklabels)
+    fig.update_layout(title="Correlation Heatmap", yaxis_autorange='reversed', template='plotly_white')
+    st.plotly_chart(fig)
+
+
 # -- Scatter matrix of emotions -- #
 
 def ScatterMatrix(data, emotionslist, rangelist):
