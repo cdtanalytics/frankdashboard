@@ -56,12 +56,8 @@ def main():
         st.write(df_info)
         
         fig = go.Figure(data=[go.Table(
-        header=dict(values=list(df.columns),
-                    fill_color='paleturquoise',
-                    align='left'),
-        cells=dict(values=[df_info,
-                   fill_color='lavender',
-                   align='left'))])
+        header=dict(values=list(df_info.columns), align='left'),
+                    cells=dict(values=[df_info, align='left'))])
         st.plotly_chart(fig)
         
         
