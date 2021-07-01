@@ -179,6 +179,8 @@ def main():
 
         # Rolled up records
         subtitles("Keyboard Input (Rolled up records): Descriptive statistics on emotions")
+        st.write("In the raw data there are mutliple records for each participant, date, and time. These records were 'rolled up' in preparation for the matching with DAILY MOODS and DEQ.")
+        st.write("---")
         st.write("All")
         st.write(summarystats(df_algo, algo_emotlist))
         st.write("By User Group")
