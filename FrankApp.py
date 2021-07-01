@@ -54,7 +54,17 @@ def main():
         
         subtitles("All Data: Summary Information")
         st.write(df_info)
-        st.table(df_info)
+        
+        fig = go.Figure(data=[go.Table(
+        header=dict(values=list(df.columns),
+                    fill_color='paleturquoise',
+                    align='left'),
+        cells=dict(values=[df_info,
+                   fill_color='lavender',
+                   align='left'))])
+        st.plotly_chart(fig)
+        
+        
         st.write('---')
 
         subtitles("Daily Participation (n participants)")
