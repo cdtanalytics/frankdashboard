@@ -54,7 +54,7 @@ def main():
         
         subtitles("All Data: Summary Information")
         st.write(df_info)
-        st.table(df_info, style = table_style)
+        st.table(df_info)
         st.write('---')
 
         subtitles("Daily Participation (n participants)")
