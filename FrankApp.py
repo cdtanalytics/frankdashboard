@@ -102,7 +102,7 @@ def main():
 
         st.write("Below is a correlation plot of the DAILY MOODS for each emotion. Anger is positively correlated with Digust, Fear, and Sadness. Joy is negatively correlated with Sadness.")
 
-        mds_col1, mds_col2 = st.beta_columns(2)
+        mds_col1, mds_col2 = st.beta_columns([3,1])
 
         with mds_col1:
             CorrHeatmap(df_mds, mds_emotlist)
@@ -140,7 +140,7 @@ def main():
 
         st.write("Below is a correlation plot of the DEQ data for each emotion. Anger is positively correlated with Digust, Fear, and Sadness. Joy is more negatively correlated with Sadness compared to the same in DAILY MOODS.")
 
-        deq_col1, deq_col2 = st.beta_columns(2)
+        deq_col1, deq_col2 = st.beta_columns([3,1])
 
         with deq_col1:
             CorrHeatmap(df_deq, deq_emotlist)
@@ -175,7 +175,7 @@ def main():
 
         st.write("Below is a correlation plot of the Keyboard Input data for each emotion. Anger is positively correlated mostly with Digust. Sadness is mostly correlated with Fear. Interestingly Joy is positively correlated with Disgust.")
 
-        kb_col1, kb_col2 = st.beta_columns(2)
+        kb_col1, kb_col2 = st.beta_columns([3,1])
 
         with kb_col1:
             CorrHeatmap(df_algo, algo_emotlist)
@@ -200,7 +200,7 @@ def main():
         st.write("The results show that sentiment is negatively correlated with Fear and Sadnes, and positively correlated with Joy, however these are weak correlations.")
         st.write("It can also be observed that word count is positivly correlated with Fear, meaning that the more words the higher the Fear score. Word is also strongly correlated with subjectivity.")
         
-        sentmds_col11, sentmds_col21 = st.beta_columns(2)
+        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         with sentmds_col11:
             SentCorrHeatmap(sentiment, kb_sent_emotlist)
         with sentmds_col21:
@@ -259,7 +259,7 @@ def main():
         st.write("Polarity: Ranges from -1.0 to 1.0 for negative to positive sentiment. You would expect text that has a high score for Joy would have more positive sentiment.")
         st.write("Subjectivity: Ranges from 0.0 to 1.0. It is an indication of how much subjectivity there is in the text. This is good for identifying text that shows opinions.")
         
-        sentmds_col1, sentmds_col2 = st.beta_columns(2)
+        sentmds_col1, sentmds_col2 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS")
         with sentmds_col1:
             SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -270,7 +270,7 @@ def main():
             st.write(corrs)
 
         subtitles("Same as above, where subjectivity is > 0.5")
-        sentmds_col11, sentmds_col21 = st.beta_columns(2)
+        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS") & (df_matches_sent['subjectivity']>=0.5)
         with sentmds_col11:
             SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -281,7 +281,7 @@ def main():
             st.write(corrs)
 
         subtitles("Same as above, where subjectivity is > 0.7")
-        sentmds_col11, sentmds_col21 = st.beta_columns(2)
+        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS") & (df_matches_sent['subjectivity']>=0.7)
         with sentmds_col11:
             SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -292,7 +292,7 @@ def main():
             st.write(corrs)
 
         subtitles("Same as above, where word count is > 5")
-        sentmds_col11, sentmds_col21 = st.beta_columns(2)
+        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=5)
         with sentmds_col11:
             SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -303,7 +303,7 @@ def main():
             st.write(corrs)
 
         subtitles("Same as above, where word count is > 10")
-        sentmds_col11, sentmds_col21 = st.beta_columns(2)
+        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=10)
         with sentmds_col11:
             SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
@@ -353,7 +353,7 @@ def main():
         st.write("The following shows the correlations between the DEQ and the sentiment analysis of the matched keyboard text, along with word count and subjectivity.")
         st.write("Polarity: Ranges from -1.0 to 1.0 for negative to positive sentiment. You would expect text that has a high score for Joy would have more positive sentiment.")
         st.write("Subjectivity: Ranges from 0.0 to 1.0. It is an indication of how much subjectivity there is in the text. This is good for identifying text that shows opinions.")
-        sentmds_col1, sentmds_col2 = st.beta_columns(2)
+        sentmds_col1, sentmds_col2 = st.beta_columns([3,1])
         mask2 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ")
         with sentmds_col1:
             SentCorrHeatmap(df_matches_sent[mask2], kb_sent_emotlist)
@@ -364,7 +364,7 @@ def main():
             st.write(corrs)
 
         subtitles("Same as above, where subjectivity is > 0.5")
-        sentmds_col11, sentmds_col21 = st.beta_columns(2)
+        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['subjectivity']>=0.5)
         with sentmds_col11:
             SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
@@ -375,7 +375,7 @@ def main():
             st.write(corrs)
 
         subtitles("Same as above, where subjectivity is > 0.7")
-        sentmds_col11, sentmds_col21 = st.beta_columns(2)
+        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['subjectivity']>=0.7)
         with sentmds_col11:
             SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
@@ -386,7 +386,7 @@ def main():
             st.write(corrs)
             
         subtitles("Same as above, where word count is > 5")
-        sentmds_col11, sentmds_col21 = st.beta_columns(2)
+        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=5)
         with sentmds_col11:
             SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
@@ -397,7 +397,7 @@ def main():
             st.write(corrs)
 
         subtitles("Same as above, where word count is > 10")
-        sentmds_col11, sentmds_col21 = st.beta_columns(2)
+        sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=10)
         with sentmds_col11:
             SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
