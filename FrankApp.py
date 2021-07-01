@@ -81,6 +81,8 @@ def main():
 
         st.write("The plot below is the same as above, but stratified by User Group - toggle the USERGROUP in the legend to see individual groups.")
         DailyBarChartUser(algo_daily_usergrp_cnts)
+        
+        st.write('---')
 
     # Daily Moods
     mds_raw = st.beta_expander("Daily Moods")
@@ -104,6 +106,7 @@ def main():
         CorrHeatmap(df_mds, mds_emotlist)
         corrs = mds_corr(df_mds, mds_emotlist)
         st.write(corrs)
+        st.write('---')
   
         st.write("Below is a scatter matrix of each emotion. The limitation of this plot is that it doesn't show how many records are under each data point.")
         st.write("Toggle the USERGROUP in the legend to see individual groups.")
@@ -135,6 +138,7 @@ def main():
         CorrHeatmap(df_deq, deq_emotlist)
         corrs = deq_corr(df_deq, deq_emotlist)
         st.write(corrs)
+        st.write('---')
 
         ScatterMatrix(df_deq, deq_emotlist, [0, 30])
 
@@ -162,7 +166,7 @@ def main():
         st.write("Below is a correlation plot of the Keyboard Input data for each emotion. Anger is positively correlated mostly with Digust. Sadness is mostly correlated with Fear. Interestingly Joy is positively correlated with Disgust.")
         CorrHeatmap(df_algo, algo_emotlist)
         corrs = kb_corr(df_algo, algo_emotlist)
-        st.write(corrs)
+        st.table(corrs)
         st.write('---')
 
         ScatterMatrix(df_algo, algo_emotlist, [0, 1])
@@ -182,7 +186,7 @@ def main():
         
         SentCorrHeatmap(sentiment, kb_sent_emotlist)
         corrs = kb_sent_corr(sentiment, kb_sent_emotlist)
-        st.write(corrs)
+        st.table(corrs)
         
         st.write('---')
 
