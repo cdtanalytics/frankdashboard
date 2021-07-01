@@ -182,6 +182,8 @@ def main():
         SentCorrHeatmap(sentiment, kb_sent_emotlist)
         corrs = kb_sent_corr(sentiment, kb_sent_emotlist)
         st.write(corrs)
+        
+        st.write('---')
 
     # - DASHBOARD 2: DATA ANALYSES - #
 
@@ -238,6 +240,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
         st.write(corrs)
+        st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.5")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
@@ -245,6 +248,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
         st.write(corrs)
+        st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.7")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
@@ -252,6 +256,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
         st.write(corrs)
+        st.write('---')
 
         subtitles("Same as above, where word count is > 5")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
@@ -259,6 +264,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
         st.write(corrs)
+        st.write('---')
 
         subtitles("Same as above, where word count is > 10")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
@@ -266,6 +272,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
         st.write(corrs)
+        st.write('---')
 
     # DEQ
     prob_diff_deq = st.beta_expander("DEQ + Keyboard Input")
@@ -312,6 +319,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask2], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask2], kb_sent_emotlist)
         st.write(corrs)
+        st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.5")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
@@ -319,6 +327,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
         st.write(corrs)
+        st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.7")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
@@ -326,6 +335,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
         st.write(corrs)
+        st.write('---')
             
         subtitles("Same as above, where word count is > 5")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
@@ -333,6 +343,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
         st.write(corrs)
+        st.write('---')
 
         subtitles("Same as above, where word count is > 10")
         sentmds_col11, sentmds_col21 = st.beta_columns([3,1])
@@ -340,6 +351,7 @@ def main():
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
         st.write(corrs)
+        st.write('---')
 
 if __name__ == "__main__":
     main()
