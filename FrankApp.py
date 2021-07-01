@@ -18,7 +18,7 @@ import seaborn as sns
 
 # -- SET STYLES -- #
 
-st.set_page_config(page_title="FRANK App")
+st.set_page_config(page_title="FRANK App", layout="wide")
 
 sns.set(style='darkgrid', font_scale=1.1)
 pd.set_option('display.max_rows', 1000)
