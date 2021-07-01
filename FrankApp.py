@@ -166,7 +166,7 @@ def main():
         st.write("Below is a correlation plot of the Keyboard Input data for each emotion. Anger is positively correlated mostly with Digust. Sadness is mostly correlated with Fear. Interestingly Joy is positively correlated with Disgust.")
         CorrHeatmap(df_algo, algo_emotlist)
         corrs = kb_corr(df_algo, algo_emotlist)
-        st.table(corrs)
+        st.write(corrs)
         st.write('---')
 
         ScatterMatrix(df_algo, algo_emotlist, [0, 1])
@@ -186,7 +186,7 @@ def main():
         
         SentCorrHeatmap(sentiment, kb_sent_emotlist)
         corrs = kb_sent_corr(sentiment, kb_sent_emotlist)
-        st.table(corrs)
+        st.dataframe(corrs)
         
         st.write('---')
 
