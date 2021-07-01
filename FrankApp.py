@@ -54,7 +54,6 @@ def main():
         
         subtitles("All Data: Summary Information")
         st.write(df_info)
-        table_style = {'width': '100%', 'border': '1px solid black'}
         st.table(df_info, style = table_style)
         st.write('---')
 
