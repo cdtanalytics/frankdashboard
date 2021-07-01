@@ -53,7 +53,7 @@ def main():
     with summaryInfo:
         
         subtitles("All Data: Summary Information")
-        st.write(df_info)
+        st.dataframe(df_info)
         st.write('---')
 
         subtitles("Daily Participation (n participants)")
@@ -105,7 +105,7 @@ def main():
         st.write("Below is a correlation plot of the DAILY MOODS for each emotion. Anger is positively correlated with Digust, Fear, and Sadness. Joy is negatively correlated with Sadness.")
         CorrHeatmap(df_mds, mds_emotlist)
         corrs = mds_corr(df_mds, mds_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
   
         st.write("Below is a scatter matrix of each emotion. The limitation of this plot is that it doesn't show how many records are under each data point.")
@@ -137,7 +137,7 @@ def main():
         st.write("Below is a correlation plot of the DEQ data for each emotion. Anger is positively correlated with Digust, Fear, and Sadness. Joy is more negatively correlated with Sadness compared to the same in DAILY MOODS.")
         CorrHeatmap(df_deq, deq_emotlist)
         corrs = deq_corr(df_deq, deq_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
         ScatterMatrix(df_deq, deq_emotlist, [0, 30])
@@ -166,7 +166,7 @@ def main():
         st.write("Below is a correlation plot of the Keyboard Input data for each emotion. Anger is positively correlated mostly with Digust. Sadness is mostly correlated with Fear. Interestingly Joy is positively correlated with Disgust.")
         CorrHeatmap(df_algo, algo_emotlist)
         corrs = kb_corr(df_algo, algo_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
         ScatterMatrix(df_algo, algo_emotlist, [0, 1])
@@ -244,7 +244,7 @@ def main():
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS")
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.5")
@@ -252,7 +252,7 @@ def main():
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS") & (df_matches_sent['subjectivity']>=0.5)
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.7")
@@ -260,7 +260,7 @@ def main():
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="MDS") & (df_matches_sent['subjectivity']>=0.7)
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
         subtitles("Same as above, where word count is > 5")
@@ -268,7 +268,7 @@ def main():
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=5)
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
         subtitles("Same as above, where word count is > 10")
@@ -276,7 +276,7 @@ def main():
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=10)
         SentCorrHeatmap(df_matches_sent[mask1], srvy_sent_emotlist)
         corrs = srvy_sent_corr(df_matches_sent[mask1], srvy_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
     # DEQ
@@ -323,7 +323,7 @@ def main():
         mask2 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ")
         SentCorrHeatmap(df_matches_sent[mask2], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask2], kb_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.5")
@@ -331,7 +331,7 @@ def main():
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['subjectivity']>=0.5)
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
         subtitles("Same as above, where subjectivity is > 0.7")
@@ -339,7 +339,7 @@ def main():
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['subjectivity']>=0.7)
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
             
         subtitles("Same as above, where word count is > 5")
@@ -347,7 +347,7 @@ def main():
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=5)
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
         subtitles("Same as above, where word count is > 10")
@@ -355,7 +355,7 @@ def main():
         mask1 = (df_matches_sent['timing'] =="30 min +/-") & (df_matches_sent['source']=="DEQ") & (df_matches_sent['word_count']>=10)
         SentCorrHeatmap(df_matches_sent[mask1], kb_sent_emotlist)
         corrs = kb_sent_corr(df_matches_sent[mask1], kb_sent_emotlist)
-        st.write(corrs)
+        st.dataframe(corrs)
         st.write('---')
 
 if __name__ == "__main__":
