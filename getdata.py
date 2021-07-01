@@ -98,7 +98,8 @@ timings = ["30 min +/-", "60 min +/-", "90 min +/-", "120 min +/", "150 min +/",
 
 srvy_sent_emotlist = ['anger', 'disgust', 'fear', 'joy', 'sadness', 'word_count', 'polarity', 'subjectivity']
 kb_sent_emotlist = ['Anger_Input', 'Disgust_Input', 'Fear_Input', 'Joy_Input', 'Sadness_Input', 'word_count', 'polarity', 'subjectivity']
-
+kb_emotlist = ['Anger_Input', 'Disgust_Input', 'Fear_Input', 'Joy_Input', 'Sadness_Input', 'word_count']
+kb_emotlist2 = ['Anger_Input', 'Disgust_Input', 'Fear_Input', 'Joy_Input', 'Sadness_Input']
 
 # -- Create a dataset of the dates by Emotion and User Group -- #
 
@@ -169,6 +170,10 @@ df_algo_long = df_algo.melt(id_vars=['USERID', 'USERGROUP'],
                         var_name='Emotion', value_name='Value')
 df_algo_long["Emotion"].replace({'Anger_input':'Anger', 'Disgust_input':'Disgust', 'Fear_input':'Fear', 'Joy_input':'Joy', 'Sadness_input':'Sadness'}, inplace=True)
 
+df_sent_long = sentiment.melt(id_vars=['USERID', 'USERGROUP'], 
+                        value_vars=kb_emotlist2,
+                        var_name='Emotion', value_name='Value')
+df_sent_long["Emotion"].replace({'Anger_Input':'Anger', 'Disgust_Input':'Disgust', 'Fear_Input':'Fear', 'Joy_Input':'Joy', 'Sadness_Input':'Sadness'}, inplace=True)
 
 # -- Cummulative Emotions long file -- #
 
