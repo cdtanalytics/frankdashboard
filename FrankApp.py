@@ -163,6 +163,7 @@ def main():
         CorrHeatmap(df_algo, algo_emotlist)
         corrs = kb_corr(df_algo, algo_emotlist)
         st.write(corrs)
+        st.write('---')
 
         ScatterMatrix(df_algo, algo_emotlist, [0, 1])
 
