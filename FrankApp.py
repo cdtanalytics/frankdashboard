@@ -18,7 +18,7 @@ import seaborn as sns
 
 # -- SET STYLES -- #
 
-st.set_page_config(page_title="FRANK App", layout="wide")
+st.set_page_config(page_title="FRANK App")
 
 sns.set(style='darkgrid', font_scale=1.1)
 pd.set_option('display.max_rows', 1000)
@@ -54,13 +54,6 @@ def main():
         
         subtitles("All Data: Summary Information")
         st.write(df_info)
-        
-        fig = go.Figure(data=[go.Table(
-        header=dict(values=list(df_info.columns)),
-                    cells=dict(values=[df_info))])
-        st.plotly_chart(fig)
-        
-        
         st.write('---')
 
         subtitles("Daily Participation (n participants)")
