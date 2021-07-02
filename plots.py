@@ -195,7 +195,7 @@ def ScatterRegUser2(data):
                     trendline="ols")
 
     fig.update_layout(title='Scatter plot of Polarity (sentiment) vs. Algorithm (By User Group)')
-    fig.update_layout(width=2100, height=400)
+    fig.update_layout(width=1700, height=400)
     for a in fig.layout.annotations:
         a.text = a.text.split("=")[1]
     st.plotly_chart(fig)
