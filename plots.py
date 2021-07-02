@@ -186,7 +186,7 @@ def ScatterRegUser(data):
         a.text = a.text.split("=")[1]
     st.plotly_chart(fig)
 
- def ScatterRegUser2(data):
+def ScatterRegUser2(data):
     fig = px.scatter(data, 
                     x="Polarity", 
                     y="Algorithm",
