@@ -175,6 +175,13 @@ df_sent_long = sentiment.melt(id_vars=['USERID', 'USERGROUP'],
                         var_name='Emotion', value_name='Value')
 df_sent_long["Emotion"].replace({'Anger_Input':'Anger', 'Disgust_Input':'Disgust', 'Fear_Input':'Fear', 'Joy_Input':'Joy', 'Sadness_Input':'Sadness'}, inplace=True)
 
+df_kb_pol = sentiment.melt(id_vars=['USERID', 'USERGROUP', 'polarity'], 
+                        value_vars=kb_emotlist2,
+                        var_name='Emotion', value_name='Algorithm')
+df_kb_pol["Emotion"].replace({'Anger_Input':'Anger', 'Disgust_Input':'Disgust', 'Fear_Input':'Fear', 'Joy_Input':'Joy', 'Sadness_Input':'Sadness'}, inplace=True)
+df_kb_pol.rename(columns={'polarity':'Polarity'}, inplace=True)
+
+
 # -- Cummulative Emotions long file -- #
 
     # Daily Moods
