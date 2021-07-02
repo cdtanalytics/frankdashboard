@@ -174,6 +174,10 @@ def main():
         st.write('---')
         
         subtitles("Keyboard Input (Raw Data): Sentiment Analysis on the Input Text and comparing it to the algorithm scores")
+        
+        st.write("The following plot is a scatter plot comparing the algorithm scores compared to the sentiment analysis (polarity) - toggle the USERGROUP in the legend to see individual groups.")
+        ScatterRegUser2(df_kb_pol)
+        
         st.write("The following shows the correlations between the raw algorithm scores and the sentiment analysis of the keyboard text, along with word count and subjectivity.")
         st.write("Polarity: Ranges from -1.0 to 1.0 for negative to positive sentiment. You would expect text that has a high score for Joy would have more positive sentiment.")
         st.write("Subjectivity: Ranges from 0.0 to 1.0. It is an indication of how much subjectivity there is in the text. This is good for identifying text that shows opinions.")
